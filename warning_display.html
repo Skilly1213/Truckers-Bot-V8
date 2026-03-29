@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Truckers Bot Alert Display</title>
+<style>
+body{background:#0b0f18;color:white;font-family:Arial;text-align:center}
+#box{margin-top:20vh;font-size:42px}
+.event{color:#ff4444;font-weight:bold}
+</style>
+<body>
+
+<div id="box">
+<div class="event" id="event">Monitoring truck alerts...</div>
+<div id="area"></div>
+</div>
+
+<script>
+async function load(){
+ try{
+  let r=await fetch("warning_data.json?"+Date.now())
+  let d=await r.json()
+  document.getElementById("event").innerText=d.event
+  document.getElementById("area").innerText=d.area
+ }catch(e){}
+}
+
+setInterval(load,2000)
+</script>
+
+</body>
+</html>
